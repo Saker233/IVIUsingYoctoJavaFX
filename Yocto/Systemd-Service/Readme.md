@@ -34,7 +34,7 @@ Before=network.target
 ExecStart=/sbin/wpa_supplicant -c /etc/wpa_supplicant.conf -i wlan0
 Restart=on-failure
 
-
+```
 ## GPS Service
 
 We use a bash script to parse GPS data from gpspipe, extracting latitude, longitude, and current speed. To automate this process, we created a systemd service.
@@ -43,7 +43,7 @@ We use a bash script to parse GPS data from gpspipe, extracting latitude, longit
 
 Here’s the configuration for the GPS service:
 
-
+```sh
 ini
 Copy code
 [Unit]
@@ -59,7 +59,7 @@ User=root
 
 [Install]
 WantedBy=multi-user.target
-
+```
 
 
 ## DNS Configuration Service
@@ -70,7 +70,7 @@ Since the Yocto image does not come with a pre-configured DNS setup, we created 
 
 Here’s the configuration for the DNS setup service:
 
-
+```sh
 ini
 Copy code
 [Unit]
@@ -86,9 +86,4 @@ User=root
 
 [Install]
 WantedBy=multi-user.target
-
-
-[Install]
-WantedBy=multi-user.target
 ```
-
