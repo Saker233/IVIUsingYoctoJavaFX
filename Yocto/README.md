@@ -143,4 +143,92 @@ MACHINE_FEATURES:append = " \
 ```
 
 
+#### 2. Distro Configuration
+
+```Yocto
+# General Configuration
+require conf/distro/poky.conf
+
+DISTRO = "project-distro"
+DISTRO_NAME = "project Distro Version 1.0"
+DISTRO_VERSION = "1.0"
+BOOTDD_VOLUME_ID = "boot"
+
+# Distro Features
+# Remove unnecessary features
+DISTRO_FEATURES:remove = "ext2 3g nfc"
+# Add essential features
+DISTRO_FEATURES:append = " wifi bluetooth ext4 bluez bluez5 python3-bluez pcmcia usbhost usbgadget pulseaudio pi-bluetooth linux-firmware-bcm43430 systemd usrmerge ipv4"
+
+# Init Manager Configuration
+INIT_MANAGER = "systemd"
+
+# Autoload sound module for Raspberry Pi
+KERNEL_MODULE_AUTOLOAD:rpi = "snd-bcm43455"
+
+# Install X11 server, drivers, terminal, and window manager
+IMAGE_INSTALL:append = " xserver-xorg xf86-video-fbdev xf86-input-evdev xterm matchbox-wm"
+
+# Install OpenSSH for remote login and file transfers
+TASK_BASIC_SSHDAEMON = "openssh-sshd openssh-sftp openssh-sftp-server"
+```
+
+#### 3.Image Configuration
+
+```Yocto
+inherit core-image
+include recipes-sato/images/core-image-sato.bb
+
+IMAGE_ROOTFS_SIZE = "10485760"
+IMAGE_FSTYPES = "wic"
+
+CXXFLAGS:remove = " -fno-implicit-templates -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Werror"
+
+# Remove unnecessary SSH-dropbear packages
+IMAGE_FEATURES:remove = " core-ssh-dropbear ssh-server-dropbear packagegroup-core-ssh-dropbear connman-gnome"
+
+# Base image packages
+IMAGE_INSTALL += " strace packagegroup-core-boot nano vim util-linux busybox matchbox-keyboard"
+IMAGE_INSTALL:append = " python3 bash git python3-pip make cmake wpa-supplicant rpm"
+
+# Flask dependencies
+IMAGE_INSTALL:append = " python3-flask python3-flask-socketio"
+
+# Network-related packages
+IMAGE_INSTALL:append = " gpsd gpsd-client libgps gps-msgs bluez5 gps-utils jq"
+
+# Multimedia and sound packages
+PACKAGECONFIG:pn-qtmultimedia = " gstreamer alsa"
+IMAGE_INSTALL:append = " gstreamer1.0 gstreamer1.0-omx gstreamer1.0-plugins-good gstreamer1.0-plugins-base gstreamer1.0-plugins-ugly gstreamer1.0-libav mpg123 pulseaudio \
+    pulseaudio-module-dbus-protocol pulseaudio-server pulseaudio-module-bluetooth-discover \
+    pulseaudio-module-bluetooth-policy pulseaudio-module-bluez5-device pulseaudio-module-bluez5-discover \
+    alsa-utils alsa-lib alsa-plugins alsa-tools alsa-state dbus ffmpeg4"
+
+# Raspberry Pi and sound support
+DISTRO_FEATURES:append = " pulseaudio"
+KERNEL_MODULE_AUTOLOAD:rpi = " snd-bcm2835"
+MACHINE_FEATURES:append = " sound"
+
+# USB support
+ENABLE_DWC2_PERIPHERAL = "1"
+ENABLE_DWC2_HOST = "1"
+
+# Bluetooth and WiFi firmware
+IMAGE_INSTALL:append = " bluez5 i2c-tools bridge-utils hostapd iptables pi-bluetooth bluez5-testtools udev-rules-rpi \
+    linux-firmware iw kernel-modules linux-firmware-ralink linux-firmware-rtl8192ce \
+    linux-firmware-rtl8192cu linux-firmware-rtl8192su linux-firmware-rpidistro-bcm43430 linux-firmware-bcm43430"
+
+# Networking tools
+IMAGE_INSTALL:append = " dhcpcd connman connman-client openssh"
+
+# Splash screen support
+IMAGE_INSTALL:append = " psplash psplash-raspberrypi"
+
+# Core utilities
+IMAGE_INSTALL:append = " coreutils"
+
+# Video support
+DISTRO_FEATURES:append = " vc4graphics"
+```
+
 
