@@ -7,8 +7,13 @@
     - Maps Button.
     - Youtube Button.
     - Spotify Button.
-
-
+      
+### Creating Fade Transision Utils
+- Create Fade Transition class that contain Transition fade in and fade out , that take Parameters ( Parent, Duration, Runnable )
+    -  Parent : node to apply fade transition on.
+    -  Duration : time that the Fade take place.
+    -  Runnable : callback Function to start at the end of Fade.
+  
 ### Speedometer
 - Adding Speed Gauge to Home screen using Medusa Library that Display live speed of the Car that are input from GPS module.
 - Input Stream to receive data from GPS.
