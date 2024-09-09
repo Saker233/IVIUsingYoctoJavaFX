@@ -23,7 +23,10 @@
     - Speed limit run even not in Home Screen.
     - add Speed Gauge to Home Screen
  
-
+### Time Display
+- Display time on Home screen.
+- Use Data time format to specify the format type.
+- Set Time according to Local time.
 
 ### Testing and Validation
 - Test fade transitions for loading screens
