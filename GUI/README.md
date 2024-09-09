@@ -49,6 +49,11 @@
 - Option to use Fade in and Fade out Utils
 - Set a callback Function and the end of each scene to load another scene
 
+### Integrate Different Application
+- Integrate different scenes between application without change scene.
+- All application runs from Menu Bar.
+- Optimize all applications to fit screen.
+
 ### Testing and Validation
 - Test fade transitions for loading screens
 - Test menu bar functionality and navigation
