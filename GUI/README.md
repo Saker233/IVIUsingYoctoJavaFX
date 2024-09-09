@@ -22,7 +22,21 @@
     - Check for Speed if it reach certain speed Warn the Driver using sound alram.
     - Speed limit run even not in Home Screen.
     - add Speed Gauge to Home Screen
- 
+
+### Maps UI and Integration
+ - add webView component that display map on it using URL
+ - Connect Map GUI to read Position File.
+ - Parse the Reading to Map to set Position on Current Location Longitude and latitude.
+ - Add Pointer for Current Position.
+ - Thread to read Map file continously
+
+
+### YouTube and Spotify
+- Use WebView to display YouTube and Spotify on.
+- Design the webview to fit the screen for FullScreen feature.
+- YouTube can play Shorts and Videos , rendering accourding to supported driver
+
+
 ### Time Display
 - Display time on Home screen.
 - Use Data time format to specify the format type.
