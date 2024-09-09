@@ -231,4 +231,28 @@ IMAGE_INSTALL:append = " coreutils"
 DISTRO_FEATURES:append = " vc4graphics"
 ```
 
+### 4. Add JavaFX To The Image
+
+Encountered a problem with JavaFX, as it is not included in the Yocto repository. To solve this problem, we need to add the JavaFX SDK to the Yocto image manually after building the image.
+
+- Download the JavaFX SDK from the [OpenJFX azul](https://www.azul.com/downloads/?version=java-22&os=linux&architecture=arm-64-bit&package=jdk-fx#zulu).
+- Download Java SE Development Kit [Linux Arm 64 RPM Package](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- Transfer the downloaded files to the Raspberry Pi.
+- Install the Java SE Development Kit on the Raspberry Pi.
+
+    ```cmd
+    sudo rpm -i jdk-17.0.2_linux-aarch64_bin.rpm
+    ```
+
+- Extract the JavaFX SDK to the Raspberry Pi.
+
+    ```cmd
+    sudo tar -xvf openjfx-17.0.2_linux-aarch64_bin-sdk.zip -C /usr/lib/jvm/
+    ```
+
+- use JavaFX to run the JavaFX application on the Raspberry Pi.
+
+    ```cmd
+    java --module-path "$JAVAFX_HOME/lib" --add-modules javafx.base,javafx.controls,javafx.graphics,javafx.fxml,javafx.media,javafx.web -jar your-app.jar
+    ```
 
