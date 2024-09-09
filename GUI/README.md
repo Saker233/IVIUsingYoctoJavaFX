@@ -42,6 +42,13 @@
 - Use Data time format to specify the format type.
 - Set Time according to Local time.
 
+
+
+### Integrate Transission Utils between Scene
+- Use Fade Transission between loading screens until home page.
+- Option to use Fade in and Fade out Utils
+- Set a callback Function and the end of each scene to load another scene
+
 ### Testing and Validation
 - Test fade transitions for loading screens
 - Test menu bar functionality and navigation
